@@ -1,0 +1,30 @@
+name: Build jars
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v3
+      - name: Build
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon --stacktrace
+      - name: Upload Forge jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: roundabout-forge
+          path: forge/build/libs/*.jar
+      - name: Upload Fabric jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: roundabout-fabric
+          path: fabric/build/libs/*.jar
