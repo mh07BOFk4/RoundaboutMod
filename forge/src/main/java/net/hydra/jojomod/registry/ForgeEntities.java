@@ -922,6 +922,11 @@ public class ForgeEntities {
                             clientTrackingRange(6).
                             build(new ResourceLocation(Roundabout.MOD_ID, "bomb_planted_enderpearl").toString())
             );
+    public static final RegistryObject<EntityType<SteelBallEntity>> STEEL_BALL =
+            ENTITY_TYPES.register("steel_ball", () ->
+                    EntityType.Builder.<SteelBallEntity>of(SteelBallEntity::new, MobCategory.MISC)
+                            .sized(0.35f, 0.35f).clientTrackingRange(6).updateInterval(1)
+                            .build(new ResourceLocation(Roundabout.MOD_ID, "steel_ball").toString()));
     public static final RegistryObject<EntityType<IronBallEntity>> IRON_BALL =
             ENTITY_TYPES.register("iron_ball", () ->
                     EntityType.Builder.<IronBallEntity>of(IronBallEntity::new, MobCategory.MISC).sized(0.9f, 0.9f).

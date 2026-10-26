@@ -377,6 +377,26 @@ public class ModSounds {
     public static final ResourceLocation BANISH_ID = new ResourceLocation(Roundabout.MOD_ID+":"+BANISH);
     public static SoundEvent BANISH_EVENT = SoundEvent.createVariableRangeEvent(BANISH_ID);
 
+    public static final String STEEL_BALL_CHARGE = "steel_ball_charge";
+    public static final ResourceLocation STEEL_BALL_CHARGE_ID = new ResourceLocation(Roundabout.MOD_ID, STEEL_BALL_CHARGE);
+    public static final SoundEvent STEEL_BALL_CHARGE_EVENT = SoundEvent.createVariableRangeEvent(STEEL_BALL_CHARGE_ID);
+
+    public static final String STEEL_BALL_GOLDEN = "steel_ball_golden";
+    public static final ResourceLocation STEEL_BALL_GOLDEN_ID = new ResourceLocation(Roundabout.MOD_ID, STEEL_BALL_GOLDEN);
+    public static final SoundEvent STEEL_BALL_GOLDEN_EVENT = SoundEvent.createVariableRangeEvent(STEEL_BALL_GOLDEN_ID);
+
+    public static final String STEEL_BALL_THROW = "steel_ball_throw";
+    public static final ResourceLocation STEEL_BALL_THROW_ID = new ResourceLocation(Roundabout.MOD_ID, STEEL_BALL_THROW);
+    public static final SoundEvent STEEL_BALL_THROW_EVENT = SoundEvent.createVariableRangeEvent(STEEL_BALL_THROW_ID);
+
+    public static final String STEEL_BALL_IMPACT = "steel_ball_impact";
+    public static final ResourceLocation STEEL_BALL_IMPACT_ID = new ResourceLocation(Roundabout.MOD_ID, STEEL_BALL_IMPACT);
+    public static final SoundEvent STEEL_BALL_IMPACT_EVENT = SoundEvent.createVariableRangeEvent(STEEL_BALL_IMPACT_ID);
+
+    public static final String STEEL_BALL_CATCH = "steel_ball_catch";
+    public static final ResourceLocation STEEL_BALL_CATCH_ID = new ResourceLocation(Roundabout.MOD_ID, STEEL_BALL_CATCH);
+    public static final SoundEvent STEEL_BALL_CATCH_EVENT = SoundEvent.createVariableRangeEvent(STEEL_BALL_CATCH_ID);
+
     public static final String IRON_BALL_BOUNCE = "iron_ball_bounce";
     public static final ResourceLocation IRON_BALL_BOUNCE_ID = new ResourceLocation(Roundabout.MOD_ID+":"+IRON_BALL_BOUNCE);
     public static SoundEvent IRON_BALL_BOUNCE_EVENT = SoundEvent.createVariableRangeEvent(IRON_BALL_BOUNCE_ID);

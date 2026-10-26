@@ -43,10 +43,16 @@ public class IronBallRenderer extends EntityRenderer<IronBallEntity> {
             //$$3.mulPose(Axis.YP.rotationDegrees((float) Mth.rotLerp($$2, (float) $$0.renderRotation, (float) $$0.lastRenderRotation)));
             $$3.mulPose(Axis.YP.rotationDegrees($$0.getYRot()));
             $$3.mulPose(Axis.ZP.rotationDegrees($$0.getXRot()));
+            if ($$0 instanceof net.hydra.jojomod.entity.projectile.SteelBallEntity) {
+                $$3.mulPose(Axis.XP.rotationDegrees(($$0.tickCount + $$2) * 48));
+            }
             $$3.translate(0,-0.2f,0);
             $$3.scale(1.45f, 1.45f, 1.45f);
             VertexConsumer $$6 = $$4.getBuffer(RenderType.entityTranslucent(getTextureLocation($$0)));
-            this.model.renderToBuffer($$3, $$6, $$5, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1f);
+            boolean steel = $$0 instanceof net.hydra.jojomod.entity.projectile.SteelBallEntity;
+            boolean golden = steel && ((net.hydra.jojomod.entity.projectile.SteelBallEntity) $$0).isGolden();
+            this.model.renderToBuffer($$3, $$6, $$5, OverlayTexture.NO_OVERLAY,
+                    golden ? 1F : steel ? 0.55F : 1F, 1F, steel ? 0.35F : 1F, 1f);
             $$3.popPose();
             super.render($$0, $$1, $$2, $$3, $$4, 15728880);
     }

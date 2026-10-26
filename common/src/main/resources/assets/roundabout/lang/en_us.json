@@ -5569,5 +5569,15 @@
   "config.roundabout.z.name": "",
   "config.roundabout.z.desc": "",
   "config.roundabout.x.name": "Applies Invis Potion",
-  "config.roundabout.x.desc": "of everything beneath this being translated, it is a lot of work. But if you really"
+  "config.roundabout.x.desc": "of everything beneath this being translated, it is a lot of work. But if you really",
+  "item.roundabout.steel_ball": "Steel Ball",
+  "item.roundabout.steel_ball.charge": "Hold Use to build Spin; release to throw.",
+  "item.roundabout.steel_ball.golden": "Release as the golden chime sounds for Golden Spin.",
+  "item.roundabout.steel_ball.return": "Ricochets, slows on impact, then returns to you.",
+  "message.roundabout.golden_spin": "Golden Spin \u2014 release now!",
+  "sounds.roundabout.steel_ball_charge": "Steel ball winds up",
+  "sounds.roundabout.steel_ball_golden": "Golden Spin resonates",
+  "sounds.roundabout.steel_ball_throw": "Steel ball whirls",
+  "sounds.roundabout.steel_ball_impact": "Steel ball strikes",
+  "sounds.roundabout.steel_ball_catch": "Steel ball returns"
 }

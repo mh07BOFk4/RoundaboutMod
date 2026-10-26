@@ -597,6 +597,7 @@ public class ForgeEvents {
         ModItems.KIRASAKU_MASK = ForgeItems.KIRASAKU_MASK.get();
         ModItems.HAYATO_KAWAJIRI_MASK = ForgeItems.HAYATO_KAWAJIRI_MASK.get();
 
+        ModItems.STEEL_BALL = ForgeItems.STEEL_BALL.get();
         ModItems.IRON_BALL_CROSSBOW = ForgeItems.IRON_BALL_CROSSBOW.get();
 
         ModItems.CAT_REMAINS = ForgeItems.CAT_REMAINS.get();
@@ -936,6 +937,7 @@ public class ForgeEvents {
         ModEntities.BOMB_PLANTED_ARROW = ForgeEntities.BOMB_PLANTED_ARROW.get();
         ModEntities.BOMB_PLANTED_SPECTRAL_ARROW = ForgeEntities.BOMB_PLANTED_SPECTRAL_ARROW.get();
         ModEntities.BOMB_PLANTED_ENDERPEARL = ForgeEntities.BOMB_PLANTED_ENDERPEARL.get();
+        ModEntities.STEEL_BALL = ForgeEntities.STEEL_BALL.get();
         ModEntities.IRON_BALL = ForgeEntities.IRON_BALL.get();
         ModEntities.ROAD_ROLLER_ENTITY = ForgeEntities.ROAD_ROLLER_ENTITY.get();
         ModEntities.SEPERATED_LEGS = ForgeEntities.SEPERATED_LEGS.get();

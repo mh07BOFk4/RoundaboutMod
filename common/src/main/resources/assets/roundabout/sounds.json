@@ -4718,5 +4718,45 @@
     "sounds": [
       "roundabout:bc_ui_select"
     ]
+  },
+  "steel_ball_charge": {
+    "subtitle": "sounds.roundabout.steel_ball_charge",
+    "sounds": [
+      {
+        "name": "roundabout:steel_ball_charge"
+      }
+    ]
+  },
+  "steel_ball_golden": {
+    "subtitle": "sounds.roundabout.steel_ball_golden",
+    "sounds": [
+      {
+        "name": "roundabout:steel_ball_golden"
+      }
+    ]
+  },
+  "steel_ball_throw": {
+    "subtitle": "sounds.roundabout.steel_ball_throw",
+    "sounds": [
+      {
+        "name": "roundabout:steel_ball_throw"
+      }
+    ]
+  },
+  "steel_ball_impact": {
+    "subtitle": "sounds.roundabout.steel_ball_impact",
+    "sounds": [
+      {
+        "name": "roundabout:steel_ball_impact"
+      }
+    ]
+  },
+  "steel_ball_catch": {
+    "subtitle": "sounds.roundabout.steel_ball_catch",
+    "sounds": [
+      {
+        "name": "roundabout:steel_ball_catch"
+      }
+    ]
   }
 }

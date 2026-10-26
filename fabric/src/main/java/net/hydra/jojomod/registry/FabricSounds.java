@@ -149,6 +149,11 @@ public class FabricSounds {
         addSound(ModSounds.DING_ID, ModSounds.DING_EVENT);
         addSound(ModSounds.BANISH_ID, ModSounds.BANISH_EVENT);
 
+        addSound(ModSounds.STEEL_BALL_CHARGE_ID, ModSounds.STEEL_BALL_CHARGE_EVENT);
+        addSound(ModSounds.STEEL_BALL_GOLDEN_ID, ModSounds.STEEL_BALL_GOLDEN_EVENT);
+        addSound(ModSounds.STEEL_BALL_THROW_ID, ModSounds.STEEL_BALL_THROW_EVENT);
+        addSound(ModSounds.STEEL_BALL_IMPACT_ID, ModSounds.STEEL_BALL_IMPACT_EVENT);
+        addSound(ModSounds.STEEL_BALL_CATCH_ID, ModSounds.STEEL_BALL_CATCH_EVENT);
         addSound(ModSounds.IRON_BALL_BOUNCE_ID, ModSounds.IRON_BALL_BOUNCE_EVENT);
         addSound(ModSounds.IRON_BALL_IMPACT_ID, ModSounds.IRON_BALL_IMPACT_EVENT);
         addSound(ModSounds.UV_BLAST_ID, ModSounds.UV_BLAST_EVENT);

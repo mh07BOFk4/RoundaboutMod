@@ -149,6 +149,16 @@ public class ForgeSounds {
             register(ModSounds.DING, ModSounds.DING_ID);
     public static final RegistryObject<SoundEvent> BANISH_EVENT =
             register(ModSounds.BANISH, ModSounds.BANISH_ID);
+    public static final RegistryObject<SoundEvent> STEEL_BALL_CHARGE_EVENT =
+            register(ModSounds.STEEL_BALL_CHARGE, ModSounds.STEEL_BALL_CHARGE_ID);
+    public static final RegistryObject<SoundEvent> STEEL_BALL_GOLDEN_EVENT =
+            register(ModSounds.STEEL_BALL_GOLDEN, ModSounds.STEEL_BALL_GOLDEN_ID);
+    public static final RegistryObject<SoundEvent> STEEL_BALL_THROW_EVENT =
+            register(ModSounds.STEEL_BALL_THROW, ModSounds.STEEL_BALL_THROW_ID);
+    public static final RegistryObject<SoundEvent> STEEL_BALL_IMPACT_EVENT =
+            register(ModSounds.STEEL_BALL_IMPACT, ModSounds.STEEL_BALL_IMPACT_ID);
+    public static final RegistryObject<SoundEvent> STEEL_BALL_CATCH_EVENT =
+            register(ModSounds.STEEL_BALL_CATCH, ModSounds.STEEL_BALL_CATCH_ID);
     public static final RegistryObject<SoundEvent> IRON_BALL_BOUNCE_EVENT =
             register(ModSounds.IRON_BALL_BOUNCE, ModSounds.IRON_BALL_BOUNCE_ID);
     public static final RegistryObject<SoundEvent> IRON_BALL_IMPACT_EVENT =

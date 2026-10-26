@@ -453,6 +453,8 @@ public class ForgeItems {
     public static final RegistryObject<Item> LUCK_SWORD = addToTab(ITEMS.register("luck_sword",
             () -> new LuckSwordItem(Tiers.IRON, 5F, -2.8F, new Item.Properties())
     ));
+    public static final RegistryObject<Item> STEEL_BALL = addToTab(ITEMS.register("steel_ball",
+            () -> new SteelBallItem(new Item.Properties().stacksTo(2))));
     public static final RegistryObject<Item> IRON_BALL_CROSSBOW = addToTab(ITEMS.register("iron_ball_crossbow",
             () -> new IronBallCrossbowItem(new Item.Properties().stacksTo(1).durability(565))
     ));
