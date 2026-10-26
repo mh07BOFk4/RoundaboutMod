@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Deque;
 
-public interface IPlayerEntity {
+public interface IPlayerEntity extends ISpinPlayer {
     Inventory roundabout$GetInventory();
     boolean roundabout$getBlinded();
     byte roundabout$getModChest();

@@ -186,7 +186,10 @@ public class PowerInventoryScreen
             boolean shouldPowers = shouldRenderPowersTab(pl);
 
             if (hasFate){
-                renderTabChosen(slot,tab == 1, context, i, j, ModBlocks.EQUIPPABLE_STONE_MASK_BLOCK.asItem().getDefaultInstance(),
+                renderTabChosen(slot,tab == 1, context, i, j,
+                        ((IPlayerEntity) pl).roundabout$getFate() == FateTypes.SPIN.ordinal()
+                                ? ModItems.SPIN_MANUAL.getDefaultInstance()
+                                : ModBlocks.EQUIPPABLE_STONE_MASK_BLOCK.asItem().getDefaultInstance(),
                         mouseX,mouseY,"power_inventory.roundabout.tabs.fate");
                 slot++;
             }

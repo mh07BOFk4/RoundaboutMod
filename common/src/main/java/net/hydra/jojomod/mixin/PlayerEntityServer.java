@@ -183,6 +183,7 @@ public abstract class PlayerEntityServer extends Player implements IPlayerEntity
                 }
             }
 
+            ipe.rdbt$setSpinExperience(((IPlayerEntity) $$0).rdbt$getSpinExperience());
             ipe.rdbt$setVampireData(((IPlayerEntity) $$0).rdbt$getVampireData());
             ipe.roundabout$setPower(((IPlayerEntity) $$0).roundabout$getPower());
         }

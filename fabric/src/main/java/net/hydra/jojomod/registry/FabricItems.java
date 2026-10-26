@@ -251,6 +251,7 @@ public class FabricItems {
     public static Item BERETTA_PISTOL = registerItem("beretta_pistol", new BerettaPistolItem(new Item.Properties().stacksTo(1)));
     public static Item PISTOL_AMMO = registerItem("pistol_ammo", new PistolAmmoItem(new Item.Properties().stacksTo(64)));
 
+    public static Item SPIN_MANUAL = registerItem("spin_manual", new SpinManualItem(new Item.Properties().stacksTo(1)));
     public static Item STEEL_BALL = registerItem("steel_ball", new SteelBallItem(new Item.Properties().stacksTo(2)));
     public static Item IRON_BALL_CROSSBOW = registerItem("iron_ball_crossbow", new IronBallCrossbowItem(new Item.Properties().stacksTo(1).durability(565)));
 
@@ -496,6 +497,7 @@ public class FabricItems {
                         entries.accept(ModBlocks.BLOODY_STONE_MASK_BLOCK);
                         entries.accept(LUCK_UPGRADE);
                         entries.accept(LUCK_SWORD);
+                        entries.accept(SPIN_MANUAL);
                         entries.accept(STEEL_BALL);
                         entries.accept(IRON_BALL_CROSSBOW);
                         entries.accept(WOODEN_GLAIVE);
@@ -1036,6 +1038,7 @@ public class FabricItems {
         //ModItems.ROTTEN_HAND = ROTTEN_HAND;
         ModItems.ROAD_ROLLER = ROAD_ROLLER;
         ModItems.METEORITE_INGOT = METEORITE_INGOT;
+        ModItems.SPIN_MANUAL = SPIN_MANUAL;
         ModItems.STEEL_BALL = STEEL_BALL;
         ModItems.IRON_BALL_CROSSBOW = IRON_BALL_CROSSBOW;
         ModItems.LOCACACA_PIT = LOCACACA_PIT;

@@ -49,7 +49,8 @@ public enum FateTypes {
     DOG(new FatePowers()),
     RAT(new FatePowers()),
     FALCON(new FatePowers()),
-    PLANKTON_COLONY(new FatePowers());
+    PLANKTON_COLONY(new FatePowers()),
+    SPIN(new net.hydra.jojomod.fates.powers.SpinFate());
 
     public final FatePowers fatePowers;
 
@@ -79,6 +80,7 @@ public enum FateTypes {
             return FALCON;
         if (bt == PLANKTON_COLONY.ordinal())
             return PLANKTON_COLONY;
+        if (bt == SPIN.ordinal()) return SPIN;
         return HUMAN;
     }
     public static boolean isHuman(LivingEntity entity){

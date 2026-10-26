@@ -26,6 +26,8 @@ public class SteelBallEntity extends IronBallEntity {
             SynchedEntityData.defineId(SteelBallEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> RETURNING =
             SynchedEntityData.defineId(SteelBallEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> TECHNIQUE =
+            SynchedEntityData.defineId(SteelBallEntity.class, EntityDataSerializers.INT);
     private float charge;
     private int age;
     private int bounces;
@@ -53,7 +55,11 @@ public class SteelBallEntity extends IronBallEntity {
         super.defineSynchedData();
         entityData.define(GOLDEN, false);
         entityData.define(RETURNING, false);
+        entityData.define(TECHNIQUE, 0);
     }
+
+    public void setSpinTechnique(int technique) { entityData.set(TECHNIQUE, Math.max(0, Math.min(2, technique))); }
+    public int getSpinTechnique() { return entityData.get(TECHNIQUE); }
 
     public boolean isGolden() { return entityData.get(GOLDEN); }
     public boolean isReturning() { return entityData.get(RETURNING); }
@@ -129,10 +135,18 @@ public class SteelBallEntity extends IronBallEntity {
     protected void onHitEntity(EntityHitResult hit) {
         if (level().isClientSide || isReturning()) return;
         Entity target = hit.getEntity();
-        if (target.hurt(damageSources().thrown(this, getOwner()), SpinCharge.damage(charge, isGolden()))
+        if (target.hurt(damageSources().thrown(this, getOwner()),
+                getSpinTechnique() == 2 ? 14 : SpinCharge.damage(charge, isGolden()))
                 && target instanceof LivingEntity living) {
             living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
-                    isGolden() ? 60 : 30, 0), getOwner());
+                    getSpinTechnique() > 0 ? 80 : isGolden() ? 60 : 30,
+                    getSpinTechnique() == 2 ? 2 : getSpinTechnique() == 1 ? 1 : 0), getOwner());
+            if (getSpinTechnique() > 0)
+                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 0), getOwner());
+            if (getOwner() instanceof Player owner &&
+                    ((net.hydra.jojomod.access.IFatePlayer) owner).rdbt$getFatePowers()
+                            instanceof net.hydra.jojomod.fates.powers.SpinFate spin)
+                spin.recordHit(target, isGolden());
         }
         impact(hit.getLocation());
         beginReturn();
@@ -168,6 +182,7 @@ public class SteelBallEntity extends IronBallEntity {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putFloat("SpinCharge", charge);
+        tag.putInt("SpinTechnique", getSpinTechnique());
         tag.putBoolean("GoldenSpin", isGolden());
         tag.putBoolean("SpinReturning", isReturning());
         tag.putBoolean("SpinRecoverable", recoverable);
@@ -178,6 +193,7 @@ public class SteelBallEntity extends IronBallEntity {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+        setSpinTechnique(tag.getInt("SpinTechnique"));
         charge = net.minecraft.util.Mth.clamp(tag.getFloat("SpinCharge"), 0, 1);
         entityData.set(GOLDEN, tag.getBoolean("GoldenSpin"));
         entityData.set(RETURNING, tag.getBoolean("SpinReturning"));

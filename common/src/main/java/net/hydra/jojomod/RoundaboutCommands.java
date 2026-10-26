@@ -185,6 +185,11 @@ public class RoundaboutCommands {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity) {
                 if (entity instanceof Player PE) {
+                    if (((IPlayerEntity) PE).roundabout$getFate() == FateTypes.SPIN.ordinal()) {
+                        int rank = net.hydra.jojomod.fates.powers.SpinProgression.rank(((IPlayerEntity) PE).rdbt$getSpinExperience());
+                        ((IPlayerEntity) PE).rdbt$setSpinExperience(net.hydra.jojomod.fates.powers.SpinProgression.requiredExperience(
+                                Mth.clamp(rank + (1), 1, 4)));
+                    }
                     if (FateTypes.isVampire(PE)) {
                         ((IPlayerEntity) PE).roundabout$setFate((byte) FateTypes.VAMPIRE.ordinal());
                         ((IPlayerEntity) PE).rdbt$getVampireData().vampireLevel =
@@ -206,6 +211,11 @@ public class RoundaboutCommands {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity) {
                 if (entity instanceof Player PE) {
+                    if (((IPlayerEntity) PE).roundabout$getFate() == FateTypes.SPIN.ordinal()) {
+                        int rank = net.hydra.jojomod.fates.powers.SpinProgression.rank(((IPlayerEntity) PE).rdbt$getSpinExperience());
+                        ((IPlayerEntity) PE).rdbt$setSpinExperience(net.hydra.jojomod.fates.powers.SpinProgression.requiredExperience(
+                                Mth.clamp(rank + (-1), 1, 4)));
+                    }
                     if (FateTypes.isVampire(PE)) {
                         ((IPlayerEntity) PE).roundabout$setFate((byte) FateTypes.VAMPIRE.ordinal());
                         ((IPlayerEntity) PE).rdbt$getVampireData().vampireLevel =
@@ -237,6 +247,13 @@ public class RoundaboutCommands {
                     } else if (LE instanceof Mob mb){
                         ((IMob)mb).roundabout$setVampire(true);
                     }
+                } else if (fate.equalsIgnoreCase("spin")) {
+                    if (LE instanceof Player PL) {
+                        ((IPlayerEntity) PL).roundabout$setFate((byte) FateTypes.SPIN.ordinal());
+                        ((IPlayerEntity) PL).rdbt$setSpinExperience(
+                                net.hydra.jojomod.fates.powers.SpinProgression.requiredExperience(Mth.clamp(level, 1, 4))
+                                        + Mth.clamp(experience, 0, 120));
+                    }
                 } else if (fate.equalsIgnoreCase("zombie")){
                     if (LE instanceof Player PL){
                         ((IPlayerEntity)PL).roundabout$setFate((byte) FateTypes.ZOMBIE.ordinal());
@@ -265,6 +282,13 @@ public class RoundaboutCommands {
     public static int roundaboutClearFateSkills(CommandSourceStack source, Collection<? extends Entity> targets) {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity LE) {
+                if (LE instanceof Player PL && ((IPlayerEntity) PL).roundabout$getFate() == FateTypes.SPIN.ordinal()) {
+                    ((IPlayerEntity) PL).rdbt$setSpinExperience(0);
+                    ((IPlayerEntity) PL).rdbt$setSpinRotation(0);
+                    ((IPlayerEntity) PL).rdbt$setSpinHorseCharge(0);
+                    ((IPlayerEntity) PL).rdbt$setSpinEmpoweredTicks(0);
+                    ((IPlayerEntity) PL).rdbt$setInfiniteSpin(false);
+                }
                 if (FateTypes.isVampire(LE)){
                     if (LE instanceof Player PL){
                         VampireData vdata = ((IPlayerEntity)PL).rdbt$getVampireData();
@@ -327,6 +351,13 @@ public class RoundaboutCommands {
     public static int roundaboutMaxFateSkills(CommandSourceStack source, Collection<? extends Entity> targets) {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity LE) {
+                if (LE instanceof Player PL && ((IPlayerEntity) PL).roundabout$getFate() == FateTypes.SPIN.ordinal()) {
+                    ((IPlayerEntity) PL).rdbt$setSpinExperience(120);
+                    ((IPlayerEntity) PL).rdbt$setSpinRotation(0);
+                    ((IPlayerEntity) PL).rdbt$setSpinHorseCharge(0);
+                    ((IPlayerEntity) PL).rdbt$setSpinEmpoweredTicks(0);
+                    ((IPlayerEntity) PL).rdbt$setInfiniteSpin(false);
+                }
                 if (FateTypes.isVampire(LE)){
                     if (LE instanceof Player PL){
                         VampireData vdata = ((IPlayerEntity)PL).rdbt$getVampireData();
