@@ -155,6 +155,7 @@ public class ModEntities {
 
     public static EntityType<StandArrowEntity> STAND_ARROW;
     public static EntityType<IronBallEntity> IRON_BALL;
+    public static EntityType<SteelBallEntity> STEEL_BALL;
     public static EntityType<ThrownObjectEntity> THROWN_OBJECT;
     public static EntityType<ReturningObjectEntity> RETURNING_OBJECT;
     public static EntityType<ThrownAnubisEntity> THROWN_ANUBIS;

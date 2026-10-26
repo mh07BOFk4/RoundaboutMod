@@ -824,6 +824,13 @@ public class FabricEntities {
                         EntityType.Builder.<KnifeEntity>of(KnifeEntity::new, MobCategory.MISC).
                                 sized(0.5f, 0.5f).clientTrackingRange(16).build(Roundabout.MOD_ID+":knife")
                 );
+    public static final EntityType<SteelBallEntity> STEEL_BALL =
+            Registry.register(
+                    BuiltInRegistries.ENTITY_TYPE,
+                    new ResourceLocation(Roundabout.MOD_ID, "steel_ball"),
+                    EntityType.Builder.<SteelBallEntity>of(SteelBallEntity::new, MobCategory.MISC).
+                            sized(0.4f, 0.4f).clientTrackingRange(16).updateInterval(2).build(Roundabout.MOD_ID+":steel_ball")
+            );
     public static final EntityType<PHCapsuleEntity> PH_CAPSULE =
             Registry.register(
                     BuiltInRegistries.ENTITY_TYPE,
@@ -1415,6 +1422,7 @@ public class FabricEntities {
                 ModEntities.BOMB_PLANTED_SPECTRAL_ARROW = BOMB_PLANTED_SPECTRAL_ARROW;
                 ModEntities.BOMB_PLANTED_ENDERPEARL = BOMB_PLANTED_ENDERPEARL;
                 ModEntities.IRON_BALL = IRON_BALL;
+                ModEntities.STEEL_BALL = STEEL_BALL;
                 ModEntities.PW_METEOR = PW_METEOR;
                 ModEntities.PW_BIG_METEOR = PW_BIG_METEOR;
                 ModEntities.COLD_TWISTER = COLD_TWISTER;

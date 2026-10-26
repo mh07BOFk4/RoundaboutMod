@@ -149,6 +149,7 @@ public class ModItems {
 
     public static Item KNIFE;
     public static Item KNIFE_BUNDLE;
+    public static Item STEEL_BALL;
 
     public static Item MATCH;
     public static Item MATCH_BUNDLE;

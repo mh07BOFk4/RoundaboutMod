@@ -161,6 +161,7 @@ public class FabricEntityClient {
         EntityRendererRegistry.register(FabricEntities.BOMB_PLANTED_ENDERPEARL, ThrownItemRenderer::new);
         EntityRendererRegistry.register(FabricEntities.BOMB_PLANTED_SPECTRAL_ARROW, BombPlantedArrowRenderer::new);
         EntityRendererRegistry.register(FabricEntities.IRON_BALL, IronBallRenderer::new);
+        EntityRendererRegistry.register(FabricEntities.STEEL_BALL, SteelBallRenderer::new);
         EntityRendererRegistry.register(FabricEntities.THROWN_OBJECT, ThrownObjectRenderer::new);
         EntityRendererRegistry.register(FabricEntities.RETURNING_OBJECT, ReturningObjectRenderer::new);
         EntityRendererRegistry.register(FabricEntities.THROWN_ANUBIS, ThrownAnubisRenderer::new);

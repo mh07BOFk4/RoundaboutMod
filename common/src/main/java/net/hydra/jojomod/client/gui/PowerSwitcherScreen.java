@@ -153,6 +153,8 @@ public class PowerSwitcherScreen extends Screen {
                 "textures/gui/icons/powers/stand/stand_summon.png"),(byte) PowerTypes.STAND.ordinal(),0,0),
         VAMPIRE(Component.translatable("text.roundabout.powers.vampire_select"), new ResourceLocation(Roundabout.MOD_ID,
                 "textures/gui/icons/powers/vampire/blood_clutch.png"),(byte) PowerTypes.VAMPIRE.ordinal(),0,62),
+        SPIN(Component.translatable("text.roundabout.powers.spin_select"), new ResourceLocation(Roundabout.MOD_ID,
+                "textures/gui/icons/powers/spin/spin.png"),(byte) PowerTypes.SPIN.ordinal(),0,93),
 
         NONE(Component.translatable("text.roundabout.powers.none"), new ResourceLocation(Roundabout.MOD_ID,
                 "textures/gui/pose_icons/jonathan.png"),(byte) PowerTypes.NONE.ordinal(),0,31);
@@ -162,6 +164,7 @@ public class PowerSwitcherScreen extends Screen {
                 default -> throw new IncompatibleClassChangeError();
                 case NONE -> NONE;
                 case VAMPIRE -> VAMPIRE;
+                case SPIN -> SPIN;
                 case STAND -> STAND;
             };
         }
@@ -192,7 +195,7 @@ public class PowerSwitcherScreen extends Screen {
         }
 
         static {
-            VALUES = new PowerSwitcherScreen.posIcon[]{VAMPIRE,STAND,NONE};
+            VALUES = new PowerSwitcherScreen.posIcon[]{VAMPIRE,SPIN,STAND,NONE};
         }
     }
 

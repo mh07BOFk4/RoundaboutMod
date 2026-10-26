@@ -17,6 +17,7 @@ import net.hydra.jojomod.event.powers.ModDamageTypes;
 import net.hydra.jojomod.event.powers.StandUser;
 import net.hydra.jojomod.fates.powers.AbilityScapeBasis;
 import net.hydra.jojomod.powers.GeneralPowers;
+import net.hydra.jojomod.powers.power_types.SpinGeneralPowers;
 import net.hydra.jojomod.powers.power_types.StandGeneralPowers;
 import net.hydra.jojomod.powers.power_types.VampireGeneralPowers;
 import net.hydra.jojomod.sound.ModSounds;
@@ -52,7 +53,7 @@ public enum PowerTypes {
     STAND(new StandGeneralPowers()),
     VAMPIRE(new VampireGeneralPowers()),
     HAMON(new GeneralPowers()),
-    SPIN(new GeneralPowers());
+    SPIN(new SpinGeneralPowers());
 
     public final GeneralPowers generalPowers;
 
@@ -612,6 +613,10 @@ public enum PowerTypes {
                 if (FateTypes.isVampire(pl)) {
                     return true;
                 }
+            } else if (bt == SPIN.ordinal()) {
+                if (FateTypes.isSpin(pl)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -631,6 +636,11 @@ public enum PowerTypes {
                     ((StandUser)entity).roundabout$setActive(false);
                     setPowerType(entity, (byte) NONE.ordinal());
                 }
+            } else if (bt == SPIN.ordinal()){
+                if (!FateTypes.isSpin(pl)){
+                    ((StandUser)entity).roundabout$setActive(false);
+                    setPowerType(entity, (byte) NONE.ordinal());
+                }
             }
 
             if (bt == NONE.ordinal()){
@@ -638,6 +648,8 @@ public enum PowerTypes {
                     setPowerType(entity, (byte) STAND.ordinal());
                 } else if (FateTypes.isVampire(pl)){
                     setPowerType(entity, (byte) VAMPIRE.ordinal());
+                } else if (FateTypes.isSpin(pl)){
+                    setPowerType(entity, (byte) SPIN.ordinal());
                 }
             }
         }

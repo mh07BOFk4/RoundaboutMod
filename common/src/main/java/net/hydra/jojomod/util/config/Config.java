@@ -62,6 +62,8 @@ public class Config implements Cloneable {
     @NestedOption(group = "modded")
     public VampireSettings vampireSettings;
     @NestedOption(group = "modded")
+    public SpinSettings spinSettings;
+    @NestedOption(group = "modded")
     public PowersSettings powersSettings;
     @NestedOption(group = "modded")
     public StandLevelingSettings standLevelingSettings;
@@ -354,6 +356,22 @@ public class Config implements Cloneable {
         public Boolean antiCheapShot;
         @BooleanOption(group = "inherit", value = true)
         public Boolean enableUVCounter;
+    }
+    public static class SpinSettings {
+        @IntOption(group = "inherit", value = 100, min = 0, max = 72000)
+        public Integer steelBallDamageMultiplier;
+        @FloatOption(group = "inherit", value = 0.5F, min = 0, max = 1F)
+        public Float spinFateFallDamageReduction;
+        @IntOption(group = "inherit", value = 12, min = 0, max = 72000)
+        public Integer spinThrowCooldown;
+        @IntOption(group = "inherit", value = 60, min = 0, max = 72000)
+        public Integer ballRecallCooldown;
+        @IntOption(group = "inherit", value = 80, min = 0, max = 72000)
+        public Integer rotationLeapCooldown;
+        @IntOption(group = "inherit", value = 140, min = 0, max = 72000)
+        public Integer rotationGuardCooldown;
+        @IntOption(group = "inherit", value = 16, min = 1, max = 72000)
+        public Integer rotationGuardDuration;
     }
     public static class StandLevelingSettings {
         @BooleanOption(group = "inherit", value = true)

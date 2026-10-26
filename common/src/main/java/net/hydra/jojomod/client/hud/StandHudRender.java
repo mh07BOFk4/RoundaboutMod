@@ -22,6 +22,7 @@ import net.hydra.jojomod.event.powers.TimeStop;
 import net.hydra.jojomod.fates.powers.AbilityScapeBasis;
 import net.hydra.jojomod.fates.powers.VampireFate;
 import net.hydra.jojomod.powers.power_types.PunchingGeneralPowers;
+import net.hydra.jojomod.powers.power_types.SpinGeneralPowers;
 import net.hydra.jojomod.powers.power_types.VampireGeneralPowers;
 import net.hydra.jojomod.stand.powers.*;
 import net.hydra.jojomod.item.MaxStandDiscItem;
@@ -411,6 +412,21 @@ public class StandHudRender {
             }
         }
 
+    }
+    /**The spin gauge: the gold bar drains as the steel ball is wound up, and flashes full once it is ready to throw.*/
+    public static void renderSpinHud(GuiGraphics context, Player playerEntity,
+                                     int scaledWidth, int scaledHeight, int x, boolean removeNum) {
+        if (((IPowersPlayer)playerEntity).rdbt$getPowers() instanceof SpinGeneralPowers spin) {
+            int l = scaledHeight - 32 + 3;
+            int st = SpinGeneralPowers.MAX_CHARGE;
+            int sc = Mth.clamp(spin.getSpinCharge(), 0, st);
+            int filled = (int) Math.floor(((double) 182 / st) * sc);
+
+            context.blit(StandIcons.JOJO_ICONS_2, x, l, 0, 30, 182, 5);
+            if (filled > 0) {
+                context.blit(StandIcons.JOJO_ICONS_2, x, l, 0, 35, filled, 5);
+            }
+        }
     }
     public static void renderCenturyBoyHud(GuiGraphics context, Player playerEntity,
                                              int scaledWidth, int scaledHeight, int x) {

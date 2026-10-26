@@ -122,6 +122,16 @@ public class StandIcons {
             "textures/gui/icons/fates/vampire/flower.png");
     public static final ResourceLocation VAMPIRE = new ResourceLocation(Roundabout.MOD_ID,
             "textures/gui/icons/fates/vampire/vampire.png");
+    public static final ResourceLocation SPIN = new ResourceLocation(Roundabout.MOD_ID,
+            "textures/gui/icons/fates/spin/spin.png");
+    public static final ResourceLocation SPIN_THROW = new ResourceLocation(Roundabout.MOD_ID,
+            "textures/gui/icons/powers/spin/spin_throw.png");
+    public static final ResourceLocation BALL_RECALL = new ResourceLocation(Roundabout.MOD_ID,
+            "textures/gui/icons/powers/spin/ball_recall.png");
+    public static final ResourceLocation ROTATION_LEAP = new ResourceLocation(Roundabout.MOD_ID,
+            "textures/gui/icons/powers/spin/rotation_leap.png");
+    public static final ResourceLocation ROTATION_GUARD = new ResourceLocation(Roundabout.MOD_ID,
+            "textures/gui/icons/powers/spin/rotation_guard.png");
     public static final ResourceLocation CHEETAH_SPEED = new ResourceLocation(Roundabout.MOD_ID,
             "textures/gui//icons/fates/vampire/cheetah_speed.png");
     public static final ResourceLocation GRAFTING = new ResourceLocation(Roundabout.MOD_ID,

@@ -928,6 +928,12 @@ public class ForgeEntities {
                             clientTrackingRange(6).
                             build(new ResourceLocation(Roundabout.MOD_ID, "iron_ball").toString())
             );
+    public static final RegistryObject<EntityType<SteelBallEntity>> STEEL_BALL =
+            ENTITY_TYPES.register("steel_ball", () ->
+                    EntityType.Builder.<SteelBallEntity>of(SteelBallEntity::new, MobCategory.MISC).sized(0.4f, 0.4f).
+                            clientTrackingRange(16).updateInterval(2).
+                            build(new ResourceLocation(Roundabout.MOD_ID, "steel_ball").toString())
+            );
     public static final RegistryObject<EntityType<ThrownObjectEntity>> THROWN_OBJECT =
             ENTITY_TYPES.register("thrown_object", () ->
                     EntityType.Builder.<ThrownObjectEntity>of(ThrownObjectEntity::new, MobCategory.MISC).sized(1f, 1f).

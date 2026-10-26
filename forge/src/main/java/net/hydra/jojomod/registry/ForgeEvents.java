@@ -382,6 +382,7 @@ public class ForgeEvents {
         ModItems.HARPOON = ForgeItems.HARPOON.get();
         ModItems.KNIFE = ForgeItems.KNIFE.get();
         ModItems.KNIFE_BUNDLE = ForgeItems.KNIFE_BUNDLE.get();
+        ModItems.STEEL_BALL = ForgeItems.STEEL_BALL.get();
         ModItems.MATCH = ForgeItems.MATCH.get();
         ModItems.MATCH_BUNDLE = ForgeItems.MATCH_BUNDLE.get();
         ModItems.GASOLINE_CAN = ForgeItems.GASOLINE_CAN.get();
@@ -937,6 +938,7 @@ public class ForgeEvents {
         ModEntities.BOMB_PLANTED_SPECTRAL_ARROW = ForgeEntities.BOMB_PLANTED_SPECTRAL_ARROW.get();
         ModEntities.BOMB_PLANTED_ENDERPEARL = ForgeEntities.BOMB_PLANTED_ENDERPEARL.get();
         ModEntities.IRON_BALL = ForgeEntities.IRON_BALL.get();
+        ModEntities.STEEL_BALL = ForgeEntities.STEEL_BALL.get();
         ModEntities.ROAD_ROLLER_ENTITY = ForgeEntities.ROAD_ROLLER_ENTITY.get();
         ModEntities.SEPERATED_LEGS = ForgeEntities.SEPERATED_LEGS.get();
         ModEntities.SEPERATED_ARM = ForgeEntities.SEPERATED_ARM.get();

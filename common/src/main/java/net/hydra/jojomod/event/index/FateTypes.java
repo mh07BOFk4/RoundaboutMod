@@ -14,6 +14,7 @@ import net.hydra.jojomod.event.powers.ModDamageTypes;
 import net.hydra.jojomod.event.powers.StandUser;
 import net.hydra.jojomod.event.powers.TimeStop;
 import net.hydra.jojomod.fates.FatePowers;
+import net.hydra.jojomod.fates.powers.SpinFate;
 import net.hydra.jojomod.fates.powers.VampireFate;
 import net.hydra.jojomod.fates.powers.VampiricFate;
 import net.hydra.jojomod.fates.powers.ZombieFate;
@@ -49,7 +50,9 @@ public enum FateTypes {
     DOG(new FatePowers()),
     RAT(new FatePowers()),
     FALCON(new FatePowers()),
-    PLANKTON_COLONY(new FatePowers());
+    PLANKTON_COLONY(new FatePowers()),
+    /**Appended at the end so that the stored fate ordinals of existing players stay the same*/
+    SPIN(new SpinFate());
 
     public final FatePowers fatePowers;
 
@@ -79,6 +82,8 @@ public enum FateTypes {
             return FALCON;
         if (bt == PLANKTON_COLONY.ordinal())
             return PLANKTON_COLONY;
+        if (bt == SPIN.ordinal())
+            return SPIN;
         return HUMAN;
     }
     public static boolean isHuman(LivingEntity entity){
@@ -93,6 +98,12 @@ public enum FateTypes {
         }
         if (entity instanceof Mob mb && ((IMob)mb).roundabout$isVampire())
             return true;
+        return false;
+    }
+    public static boolean isSpin(LivingEntity entity){
+        if (entity instanceof Player PE){
+            return ((IPlayerEntity)PE).roundabout$getFate() == SPIN.ordinal();
+        }
         return false;
     }
     public static boolean isZombie(LivingEntity entity){
