@@ -801,6 +801,7 @@ public class ForgeEvents {
         FireBlock fire = (FireBlock) Blocks.FIRE;
         ((IFireBlock) fire).roundabout$bootstrap();
 
+        ModEffects.SPIN_WOUND = ForgeEffects.SPIN_WOUND.get();
         ModEffects.BLEED = ForgeEffects.BLEED.get();
         ModEffects.HEX = ForgeEffects.HEX.get();
         ModEffects.BANISH = ForgeEffects.BANISH.get();

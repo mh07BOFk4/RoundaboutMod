@@ -1,126 +1,150 @@
-# Steel Ball and Spin Fate
+# Spin Fate: active steel-ball combat
 
-## Choosing Spin
+All four base techniques work as soon as you learn Spin. There is no Rotation
+meter, passive resource regeneration, resource cost, or horse-charge timer.
+Short cooldowns and recovering your two steel balls set the combat rhythm.
+These mechanics are gameplay adaptations of Gyro's Spin, muscle manipulation,
+medical applications, trajectory control, and the horse's Golden Rectangle.
 
-Craft a **Spin Manual** with a book, a gold ingot, and an iron nugget
-(shapeless). Use it while human to choose the Spin Fate. It does not consume the
-manual or replace another non-human Fate. Use it again to print your training
-status, or sneak-use it to return to human while retaining earned training.
-The manual is also in the mod creative tab as `roundabout:spin_manual`.
+## Starting and controls
 
-Open the existing Roundabout power inventory and select the **Fate** tab
-(book icon). It shows the Spin training path with locked/unlocked techniques.
-Use your remappable **Skill 1–4** keys from Minecraft Controls → Roundabout.
-Desummon your Stand before using Fate skills, as with the other Fates.
+Craft a Spin Manual from a book, a gold ingot, and an iron nugget (shapeless).
+Use it as a human to learn Spin. It does not overwrite another non-human Fate.
+Sneak-use the manual to become human again without losing practice.
+Use it normally as a Spin user to print your rank and practice.
 
-| Skill | Unlock | Technique | Rotation cost | Cooldown |
-| --- | --- | --- | --- | --- |
-| 1 | Rank 1, 0 practice | Spin Shot: instant 80%-charged throw | 0 | 0.8s |
-| 2 | Rank 2, 20 practice | Disrupting Spin: full shot, Slowness II + Weakness for 4s | 20 | 3s |
-| 3 | Rank 3, 60 practice | Spin Step: forward dash while grounded and unmounted | 15 | 4s |
-| 4 | Rank 4, 120 practice | Golden Rotation: golden throws for 6s | 100 | 20s |
+Craft a Steel Ball from four iron ingots arranged above/below/left/right of an
+iron nugget. Two balls fit in a stack. Hold them in either hand for throwing.
+Both items are in the mod creative tab.
 
-Skills 1 and 2 require a Steel Ball in either hand and consume one on a
-successful throw until it returns. Failed skill use consumes no ball or
-Rotation. Successful hits on mobs/players award 4 practice, or 6 for golden
-hits, and restore 12 Rotation. Holding a Steel Ball restores 1 Rotation per
-second outside empowerment. Misses, invulnerable targets, and armor stands
-do not award training. Rotation caps at 100.
+Press **Y** (Power Inventory) and select the Fate/book tab for the technique
+menu. Default Skill 1–4 keys are **Z, X, C, V**; remap them under Minecraft
+Controls → Roundabout Controls. Desummon your Stand to use Fate techniques.
 
-Training is saved, replicated to the client, and retained on respawn.
-Temporary Rotation, horse rhythm, and empowerment reset on rejoining,
-respawning, or switching Fates. The existing lose-Fate-on-death gamerule and
-respawn-as-human choice still apply; learned training remains available if
-you choose Spin again.
+| Input | Technique | Cooldown |
+| --- | --- | --- |
+| Z | Instantly throw a fully spinning Steel Ball | 0.5s |
+| Sneak + Z | Muscle Spin: a precision throw that affects the muscles you hit | 0.5s |
+| X | Aim at a new point and redirect an airborne ball toward it | 0.4s |
+| Sneak + X | Recall your airborne balls; return flight cannot deal damage | 0.4s, separate from steering |
+| C | Body Spin: harden your muscles and time a defensive counter | 4s |
+| Sneak + C | First Aid Spin: heal and restore blood flow | 8s, shared with hardening |
+| V | Instant Golden Rectangle shot | 3s; 8s for mastered mounted shots |
+| Sneak + V | Opposite Rotation: cancel Lingering Rotation on yourself | 4s, separate from shooting |
 
-## Horse mastery and Infinite Rotation
+Failed actions consume no item and start no cooldown. Steering/recalling,
+first aid, and reversing rotation do not require a ball in your hand.
+Throwing still requires one, and consumes one until it returns.
 
-At rank 4, ride a **tamed, saddled horse** as its controlling rider. Keep
-moving on the ground for 10 seconds to build horse rhythm to 100%. Stopping,
-dismounting, jumping, or the horse being hurt decays rhythm; lower ranks
-cannot build it.
+## Combos and target feedback
 
-With full rhythm and 100 Rotation, activate **Skill 4 while still riding
-and moving**. It activates Infinite Rotation instead of ordinary Golden
-Rotation. For 10 seconds, your steel-ball throws deal 14 damage and inflict
-Slowness III and Weakness for 4 seconds. Rhythm and Rotation are spent;
-the 20-second cooldown remains. This is a bounded combat ability, not an
-unlimited-damage or permanent-debuff effect.
+- **Z → aim → X:** curve your existing ball onto a new trajectory. It still
+  collides with terrain; this is steering, not teleportation or wall penetration.
+- **Bank shot:** bounce a ball off terrain into a target for +2 impact damage.
+- **Sneak + Z:** aim at the lower 45% of a target's body for Slowness III,
+  or its upper body for Weakness II. Both last 3 seconds. Contacts are derived
+  from the projectile trajectory, rather than the arrow hit result's default
+  target-feet position.
+- **C just before impact → Z:** the first 0.4 seconds of hardening reduces
+  eligible physical damage by 75% and grants a golden counterthrow for 2 seconds.
+  Later hardening reduces it by 40%. The counter is spent only on a successful
+  ordinary throw; an already-golden throw preserves it until the timer expires.
+- **Sneak + C:** heals one heart, stops the mod's bleeding, and removes
+  Slowness/Weakness. At rank 3 it heals two hearts. Full-health, unaffected
+  players cannot waste its cooldown. It does not remove Lingering Rotation.
+- **Sneak + V while affected:** reverse the lingering rotation wound and remove
+  its slowing effect. This does not remove Tusk's separate Infinite Spin effect.
 
-Operator commands support Spin:
+Hardening does not reduce fall, fire, poison, magic, armor-bypassing damage,
+or damage that bypasses invulnerability. Normal damage permissions remain in
+force; denied damage cannot apply debuffs or award practice.
 
-- `/roundaboutSetFate @s spin 1 0`: select Spin at rank 1.
-- `/roundaboutMaxFateSkills @s`: unlock all four techniques.
-- `/roundaboutClearFateSkills @s`: clear training and temporary empowerment.
-- Existing Fate level-up/down commands also adjust Spin rank.
+## Mastery improves the moves
 
-## Throwing manually
+The existing practice save is preserved. Standard hits award 4 practice;
+golden hits award 6. Bank shots and redirected hits add 2. Perfect physical
+blocks award 2. Misses, denied damage, and armor stands do not award practice.
 
-Craft one ball using four iron ingots in a diamond around an iron nugget.
-It is also available in the mod creative tab as `roundabout:steel_ball`.
-Two balls fit in a stack, allowing alternating throws.
+| Practice | Upgrade |
+| --- | --- |
+| 0 | All base techniques and one redirect per ball |
+| 20 | Two redirects per ball |
+| 60 | One extra ricochet, 2-second hardening, two-heart first aid |
+| 120 | Natural horse movement enables Infinite Rotation shots |
 
-Hold Use for at least 0.4 seconds, then release to throw. Charging increases
-speed and damage. At 1.5 seconds, a chime and action-bar prompt open a
-half-second Golden Spin release window. Holding longer retains full ordinary
-charge but loses the timing bonus. During Golden/Infinite Rotation,
-throws automatically receive the golden bonus. Manual throws remain available
-without choosing a Fate.
+At rank 4, ride a **moving, tamed, saddled horse** as its controlling rider,
+with the horse grounded and not currently hurt. The HUD shows when the Golden
+Rectangle is aligned. Press V to fire a mastered shot immediately. No meter
+or ten-second riding timer is required. A stationary, untamed, unsaddled,
+airborne, or hurt horse does not qualify; V fires an ordinary golden shot.
 
-Ordinary throws deal 4–8 damage and ricochet once; Golden Spin deals 10 damage
-and ricochets twice. A hit slows the target briefly (1.5 seconds, or 3 seconds
-for Golden Spin). Damage and status effects are decided on the server.
+A mastered mounted shot deals 12 initial damage, inflicts Slowness II for
+3 seconds, and transmits **Lingering Rotation** for 3.5 seconds. That wound
+adds small periodic magical damage and a low golden spiral around the target.
+It has a fixed duration and no exponential scaling. Opposite Rotation or milk
+can clear it. Existing Tusk mechanics remain separate.
 
-Balls return after a hit, exhausting their ricochets, or 1.2 seconds of flight.
-Returning balls phase through terrain and cannot hit entities. Survival throws
-consume one item until it returns. A full inventory causes a recoverable drop;
-creative throws never duplicate items. If the owner dies or cannot be reached
-within six seconds of active entity ticking, the ball drops at its location.
-Unloaded chunks pause this timer. Flight state and the carried item are saved.
+## Manual throwing, effects, and recovery
 
-Effects include a rotating green ball, double spiral trails, and golden impact
-bursts. **The charge ring and all charge particles near the aiming point have
-been removed**; charge timing uses sound and a brief action-bar message.
-Five original synthesized mono Vorbis sounds cover
-charge, golden readiness, throw, impact, and catch, with English subtitles.
-No anime audio samples are used.
+Right-click charging is optional: hold Use for at least 0.4 seconds and release
+to throw. Charge raises damage/speed. At 1.5 seconds, a chime and short text
+prompt open a half-second golden-release window. Z and V throw instantly.
 
-## Validation
+Ordinary full-charge impacts deal 8 damage, golden impacts deal 10, and a bank
+shot adds 2. Mounted mastered shots have a fixed 12-damage impact before their
+lingering effect. Defensive golden counters and timed releases share the normal
+golden damage and ricochet rules.
 
-Run `bash tests/spin/run.sh` with a JDK for timing/damage boundary tests.
-Run `bash gradlew :fabric:compileJava :forge:compileJava` with Java 17 for both
-platforms. The Forge build passed with Java 17 using
-`bash gradlew --no-daemon --configure-on-demand --max-workers=2 :forge:jar`,
-including the required `reobfJar` step. All 47 timing/damage/progression/resource/
-horse-rhythm checks passed.
-The final JAR passed ZIP integrity and steel-ball class/resource checks.
-The Sponge downloader's direct-DNS issue was resolved in the cloud machine by
-prefetching official Minecraft manifests, binaries, and mappings through the
-session proxy into its cache, verifying the published artifact hashes.
-Fabric compilation and in-game acceptance checks remain unverified.
+Each ball can be redirected once (twice from rank 2). Steering extends its
+outbound time within an absolute 3.6-second cap; it never resets its total
+lifetime. Default outbound time is 1.6 seconds. Balls return after a target hit,
+exhausting their ricochets, recall, or the outbound timer. Return flight phases
+through terrain and cannot hit entities. If an owner is dead or cannot be
+reached within 10 seconds of active entity ticking, the item drops. Unloaded
+chunks pause entity ticking. A full inventory also results in a drop; creative
+throws cannot duplicate items. Save/reload preserves flight/steering/recovery state.
 
-In-game acceptance checks (still required on both platforms):
+The aiming-point charge particles remain removed. Feedback comes from the
+rotating ball, double spiral trails, impact sparks, low wound spirals, timing
+text, original synthesized throw/impact/catch sounds, steering audio, and
+perfect-defense/mounted-shot chimes.
 
-- Learn Spin with the manual as human; ensure another Fate is not overwritten.
-- Verify Skill 2–4 stay locked below their practice thresholds and unlock from
-  successful combat hits. Check both hands, costs, cooldown overlays, and the Fate menu.
-- Reconnect and respawn; verify training persists and temporary resources reset.
-- Verify skill packets cannot bypass locks/costs/cooldowns or act while
-  sleeping, dazed, time-stopped, spectating, using an item, or a Stand is active.
-- At mastery, verify a stationary/untamed/unsaddled horse cannot charge rhythm.
-  Ride for 10 seconds; activate Skill 4 with 100 Rotation and check empowerment
-  expires, resources are spent, and returning balls cannot damage anything.
-- Confirm there are no charge particles at or near the crosshair.
-- Craft a ball; check item art, tooltip, and creative-tab entry.
-- Cancel before 0.4 seconds: no item loss, throw sound, or projectile.
-- Release before, during, and after the golden chime; compare damage on
-  an unarmored target and ensure the bonus expires after the window.
-- Hit a wall, floor, and ceiling; verify ricochets, then safe return.
-- Hit a mob, a shield, and a player with PvP disabled; confirm normal
-  Minecraft damage permissions, one hit per throw, and no return-flight damage.
-- Throw two balls; catch with space and with a full inventory. Count items.
-- Repeat in creative, after death/disconnect, and after saving/reloading
-  mid-flight; verify no extra items are created.
-- Have a second player observe trails and sounds; toggle subtitles and
-  reduced particles, and verify the client works against a dedicated server.
-- Confirm existing iron-ball crossbow shots retain their previous behavior.
+Training persists on reconnect and respawn. Temporary defense/counter windows
+reset on reconnect, respawn, and changing Fate. The existing lose-Fate-on-death
+rule and respawn-as-human option still apply; learned training remains available
+when choosing Spin again.
+
+## Operator commands and validation
+
+- `/roundaboutSetFate @s spin 1 0`: choose Spin at rank 1.
+- `/roundaboutMaxFateSkills @s`: grant mastery upgrades.
+- `/roundaboutClearFateSkills @s`: reset practice and temporary defense/counter windows.
+- Existing Fate level-up/down commands adjust Spin rank.
+
+Run `bash tests/spin/run.sh` with a JDK. It covers 79 timing, damage, progression,
+defense-window, mounted-mastery, ownership, steering, contact-height, and lifetime
+checks. Build Forge with Java 17 using
+`bash gradlew --no-daemon --configure-on-demand --max-workers=2 :forge:jar`;
+include the required `reobfJar` step. Check final ZIP integrity, class/resource
+presence, and that the SteelBallItem class contains no charge-particle calls.
+
+In-game acceptance checks remain required:
+
+- Start at zero practice; exercise all eight inputs, both hands, cooldowns, and
+  the Fate menu. Confirm no Rotation meter or passive waiting requirement.
+- Steer before and after a bank shot; check rank-1/rank-2 budgets and that
+  another player's balls and harmless return flight cannot be redirected.
+- Hit legs/upper body, shielded targets, PvP-disabled players, and mobs. Check
+  bonuses, permissions, practice awards, and lack of repeated return damage.
+- Time a body-spin defense; compare early/late/environmental hits, consume a
+  golden counter, miss its window, and test first aid and opposite rotation.
+- Test mounted shots with mastery and each valid/invalid horse condition;
+  confirm the lingering effect expires without increasing its damage.
+- Test full-inventory recovery, creative mode, death/disconnect, and save/reload
+  while a ball is airborne or returning. Count items for duplication/loss.
+- On a dedicated server, observe trajectories, effects, cooldowns, and sounds
+  from a second player. Verify no charge particles obstruct aiming.
+
+Forge compilation, rule tests, and package checks are verified separately from
+in-game behavior. Fabric registration is maintained; its build and gameplay
+checks remain unverified.

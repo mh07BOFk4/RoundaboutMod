@@ -31,6 +31,9 @@ public class SteelBallEntity extends IronBallEntity {
     private float charge;
     private int age;
     private int bounces;
+    private int redirects;
+    private int bounceLimit;
+    private int returnAge = SpinProjectileRules.OUTBOUND_TICKS;
     private boolean recoverable;
 
     public SteelBallEntity(EntityType<? extends SteelBallEntity> type, Level level) {
@@ -45,8 +48,9 @@ public class SteelBallEntity extends IronBallEntity {
         setOwner(owner);
         setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         setArrow(stack.copyWithCount(1));
-        this.charge = charge;
+        this.charge = SpinCharge.clamp(charge);
         entityData.set(GOLDEN, golden);
+        bounceLimit = golden ? 3 : 2;
         recoverable = !owner.getAbilities().instabuild;
     }
 
@@ -60,6 +64,26 @@ public class SteelBallEntity extends IronBallEntity {
 
     public void setSpinTechnique(int technique) { entityData.set(TECHNIQUE, Math.max(0, Math.min(2, technique))); }
     public int getSpinTechnique() { return entityData.get(TECHNIQUE); }
+
+    public void setBounceLimit(int limit) { bounceLimit = Math.max(2, Math.min(4, limit)); }
+
+    public boolean redirect(Player player, Vec3 target, int limit) {
+        if (level().isClientSide || !SpinProjectileRules.canRedirect(getOwner() == player,
+                isReturning(), redirects, limit, age)) return false;
+        Vec3 direction = target.subtract(position());
+        if (!Double.isFinite(direction.lengthSqr()) || direction.lengthSqr() < 0.01) return false;
+        setDeltaMovement(direction.normalize().scale(Math.max(1.4, Math.min(2.6, getDeltaMovement().length()))));
+        returnAge = SpinProjectileRules.returnDeadline(age, returnAge);
+        redirects++;
+        hasImpulse = true;
+        return true;
+    }
+
+    public boolean recall(Player player) {
+        if (level().isClientSide || getOwner() != player || isReturning()) return false;
+        beginReturn();
+        return true;
+    }
 
     public boolean isGolden() { return entityData.get(GOLDEN); }
     public boolean isReturning() { return entityData.get(RETURNING); }
@@ -88,9 +112,9 @@ public class SteelBallEntity extends IronBallEntity {
             return;
         }
         age++;
-        if (age >= 24) beginReturn();
+        if (age >= returnAge) beginReturn();
         Entity owner = getOwner();
-        if (age >= 120 || (owner != null && !owner.isAlive())) {
+        if (age >= SpinProjectileRules.LIFETIME_TICKS || (owner != null && !owner.isAlive())) {
             recover(null);
             return;
         }
@@ -135,20 +159,30 @@ public class SteelBallEntity extends IronBallEntity {
     protected void onHitEntity(EntityHitResult hit) {
         if (level().isClientSide || isReturning()) return;
         Entity target = hit.getEntity();
+        // The server's arrow hit result may contain only the target's feet position.
+        // Recover the trajectory intersection so upper-body and leg shots really differ.
+        Vec3 contact = target.getBoundingBox().inflate(0.1).clip(position(), position().add(getDeltaMovement()))
+                .orElse(target.getBoundingBox().getCenter());
         if (target.hurt(damageSources().thrown(this, getOwner()),
-                getSpinTechnique() == 2 ? 14 : SpinCharge.damage(charge, isGolden()))
+                SpinCharge.damage(charge, isGolden(), bounces > 0, getSpinTechnique() == 2))
                 && target instanceof LivingEntity living) {
-            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
-                    getSpinTechnique() > 0 ? 80 : isGolden() ? 60 : 30,
-                    getSpinTechnique() == 2 ? 2 : getSpinTechnique() == 1 ? 1 : 0), getOwner());
-            if (getSpinTechnique() > 0)
-                living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 0), getOwner());
+            if (getSpinTechnique() == 2) {
+                living.addEffect(new MobEffectInstance(net.hydra.jojomod.event.ModEffects.SPIN_WOUND, 70, 0), getOwner());
+                living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), getOwner());
+            } else if (getSpinTechnique() == 1) {
+                boolean legs = SpinProjectileRules.hitsLegs(contact.y - living.getY(), living.getBbHeight());
+                living.addEffect(new MobEffectInstance(legs ? MobEffects.MOVEMENT_SLOWDOWN : MobEffects.WEAKNESS,
+                        60, legs ? 2 : 1), getOwner());
+            } else {
+                living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
+                        isGolden() ? 40 : 20, 0), getOwner());
+            }
             if (getOwner() instanceof Player owner &&
                     ((net.hydra.jojomod.access.IFatePlayer) owner).rdbt$getFatePowers()
                             instanceof net.hydra.jojomod.fates.powers.SpinFate spin)
-                spin.recordHit(target, isGolden());
+                spin.recordHit(target, isGolden(), bounces > 0 || redirects > 0);
         }
-        impact(hit.getLocation());
+        impact(contact);
         beginReturn();
     }
 
@@ -159,7 +193,7 @@ public class SteelBallEntity extends IronBallEntity {
         state.onProjectileHit(level(), state, hit, this);
         if (isRemoved()) return;
         impact(hit.getLocation());
-        if (++bounces >= (isGolden() ? 3 : 2)) {
+        if (++bounces >= (bounceLimit > 0 ? bounceLimit : isGolden() ? 3 : 2)) {
             beginReturn();
             return;
         }
@@ -188,17 +222,24 @@ public class SteelBallEntity extends IronBallEntity {
         tag.putBoolean("SpinRecoverable", recoverable);
         tag.putInt("SpinAge", age);
         tag.putInt("SpinBounces", bounces);
+        tag.putInt("SpinRedirects", redirects);
+        tag.putInt("SpinBounceLimit", bounceLimit);
+        tag.putInt("SpinReturnAge", returnAge);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         setSpinTechnique(tag.getInt("SpinTechnique"));
-        charge = net.minecraft.util.Mth.clamp(tag.getFloat("SpinCharge"), 0, 1);
+        charge = SpinCharge.clamp(tag.getFloat("SpinCharge"));
         entityData.set(GOLDEN, tag.getBoolean("GoldenSpin"));
         entityData.set(RETURNING, tag.getBoolean("SpinReturning"));
         recoverable = tag.getBoolean("SpinRecoverable");
-        age = Math.max(0, tag.getInt("SpinAge"));
-        bounces = Math.max(0, tag.getInt("SpinBounces"));
+        age = Math.max(0, Math.min(SpinProjectileRules.LIFETIME_TICKS, tag.getInt("SpinAge")));
+        bounces = Math.max(0, Math.min(4, tag.getInt("SpinBounces")));
+        redirects = Math.max(0, Math.min(2, tag.getInt("SpinRedirects")));
+        setBounceLimit(tag.contains("SpinBounceLimit") ? tag.getInt("SpinBounceLimit") : isGolden() ? 3 : 2);
+        returnAge = tag.contains("SpinReturnAge") ? Math.max(SpinProjectileRules.OUTBOUND_TICKS,
+                Math.min(SpinProjectileRules.MAX_OUTBOUND_TICKS, tag.getInt("SpinReturnAge"))) : SpinProjectileRules.OUTBOUND_TICKS;
     }
 }

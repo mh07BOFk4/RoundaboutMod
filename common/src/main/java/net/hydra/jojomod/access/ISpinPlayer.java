@@ -4,12 +4,8 @@ package net.hydra.jojomod.access;
 public interface ISpinPlayer {
     int rdbt$getSpinExperience();
     void rdbt$setSpinExperience(int value);
-    int rdbt$getSpinRotation();
-    void rdbt$setSpinRotation(int value);
-    int rdbt$getSpinHorseCharge();
-    void rdbt$setSpinHorseCharge(int value);
-    int rdbt$getSpinEmpoweredTicks();
-    void rdbt$setSpinEmpoweredTicks(int value);
-    boolean rdbt$isInfiniteSpin();
-    void rdbt$setInfiniteSpin(boolean value);
+    int rdbt$getSpinGuardTicks();
+    void rdbt$setSpinGuardTicks(int value);
+    int rdbt$getSpinCounterTicks();
+    void rdbt$setSpinCounterTicks(int value);
 }

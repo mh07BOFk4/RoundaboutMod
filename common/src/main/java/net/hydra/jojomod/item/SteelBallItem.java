@@ -58,22 +58,31 @@ public class SteelBallItem extends Item {
 
     /** Shared by item release and Fate skills: the server owns consumption and buffs. */
     public boolean throwBall(Player player, ItemStack stack, float charge, boolean golden, boolean disruptive) {
+        return throwBall(player, stack, charge, golden, disruptive, false);
+    }
+
+    public boolean throwBall(Player player, ItemStack stack, float charge, boolean golden, boolean disruptive, boolean requestedInfinite) {
         Level level = player.level();
         if (level.isClientSide || stack.isEmpty() || !stack.is(this)
                 || player.getCooldowns().isOnCooldown(this)) return false;
-        boolean infinite = false;
-        if (((net.hydra.jojomod.access.IFatePlayer) player).rdbt$getFatePowers()
-                instanceof net.hydra.jojomod.fates.powers.SpinFate spin) {
-            golden |= spin.isEmpowered();
-            infinite = spin.hasInfiniteRotation();
-        }
+        net.hydra.jojomod.fates.powers.SpinFate spin =
+                ((net.hydra.jojomod.access.IFatePlayer) player).rdbt$getFatePowers()
+                        instanceof net.hydra.jojomod.fates.powers.SpinFate fate ? fate : null;
+        boolean infinite = requestedInfinite && spin != null && spin.canUseInfinite();
+        boolean counter = spin != null && spin.hasCounter() && !golden;
+        golden |= counter || infinite;
+
         SteelBallEntity ball = new SteelBallEntity(level, player, stack, charge, golden);
         ball.setSpinTechnique(infinite ? 2 : disruptive ? 1 : 0);
+        ball.setBounceLimit((golden ? 3 : 2) + (spin != null && spin.rank() >= 3 ? 1 : 0));
         ball.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.4F + charge, 0.25F);
         if (!level.addFreshEntity(ball)) return false;
+        if (counter) spin.consumeCounter();
+        if (infinite) level.playSound(null, player.blockPosition(), ModSounds.STEEL_BALL_GOLDEN_EVENT,
+                SoundSource.PLAYERS, 0.8F, 0.65F);
         player.swing(stack == player.getMainHandItem() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, true);
         if (!player.getAbilities().instabuild) stack.shrink(1);
-        player.getCooldowns().addCooldown(this, 12);
+        player.getCooldowns().addCooldown(this, 8);
         player.awardStat(Stats.ITEM_USED.get(this));
         level.playSound(null, player.blockPosition(), ModSounds.STEEL_BALL_THROW_EVENT,
                 SoundSource.PLAYERS, 0.8F, golden ? 1.2F : 0.9F);

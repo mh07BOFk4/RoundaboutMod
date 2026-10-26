@@ -284,10 +284,8 @@ public class RoundaboutCommands {
             if (entity instanceof LivingEntity LE) {
                 if (LE instanceof Player PL && ((IPlayerEntity) PL).roundabout$getFate() == FateTypes.SPIN.ordinal()) {
                     ((IPlayerEntity) PL).rdbt$setSpinExperience(0);
-                    ((IPlayerEntity) PL).rdbt$setSpinRotation(0);
-                    ((IPlayerEntity) PL).rdbt$setSpinHorseCharge(0);
-                    ((IPlayerEntity) PL).rdbt$setSpinEmpoweredTicks(0);
-                    ((IPlayerEntity) PL).rdbt$setInfiniteSpin(false);
+                    ((IPlayerEntity) PL).rdbt$setSpinGuardTicks(0);
+                    ((IPlayerEntity) PL).rdbt$setSpinCounterTicks(0);
                 }
                 if (FateTypes.isVampire(LE)){
                     if (LE instanceof Player PL){
@@ -353,10 +351,8 @@ public class RoundaboutCommands {
             if (entity instanceof LivingEntity LE) {
                 if (LE instanceof Player PL && ((IPlayerEntity) PL).roundabout$getFate() == FateTypes.SPIN.ordinal()) {
                     ((IPlayerEntity) PL).rdbt$setSpinExperience(120);
-                    ((IPlayerEntity) PL).rdbt$setSpinRotation(0);
-                    ((IPlayerEntity) PL).rdbt$setSpinHorseCharge(0);
-                    ((IPlayerEntity) PL).rdbt$setSpinEmpoweredTicks(0);
-                    ((IPlayerEntity) PL).rdbt$setInfiniteSpin(false);
+                    ((IPlayerEntity) PL).rdbt$setSpinGuardTicks(0);
+                    ((IPlayerEntity) PL).rdbt$setSpinCounterTicks(0);
                 }
                 if (FateTypes.isVampire(LE)){
                     if (LE instanceof Player PL){

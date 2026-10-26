@@ -15,6 +15,8 @@ public class ForgeEffects{
 
     public static final DeferredRegister<MobEffect> POTION_EFFECTS =
             DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Roundabout.MOD_ID);
+    public static final RegistryObject<MobEffect> SPIN_WOUND =
+            POTION_EFFECTS.register("spin_wound", net.hydra.jojomod.fates.powers.SpinWoundEffect::new);
     public static final RegistryObject<MobEffect> BLEED =
             POTION_EFFECTS.register("bleed", () ->
                     new Effect(MobEffectCategory.HARMFUL, 11994666)

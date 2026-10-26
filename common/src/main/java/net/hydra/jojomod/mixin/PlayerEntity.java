@@ -168,14 +168,11 @@ public abstract class PlayerEntity extends LivingEntity implements IPlayerEntity
 
     @Unique
     private static final EntityDataAccessor<Integer> ROUNDABOUT$SPIN_EXPERIENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+
     @Unique
-    private static final EntityDataAccessor<Integer> ROUNDABOUT$SPIN_ROTATION = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> ROUNDABOUT$SPIN_GUARD = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
     @Unique
-    private static final EntityDataAccessor<Integer> ROUNDABOUT$SPIN_HORSE_CHARGE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-    @Unique
-    private static final EntityDataAccessor<Integer> ROUNDABOUT$SPIN_EMPOWERED = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-    @Unique
-    private static final EntityDataAccessor<Boolean> ROUNDABOUT$SPIN_INFINITE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> ROUNDABOUT$SPIN_COUNTER = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
 
     @Unique
     public Deque<Vec3> rdbt$movementHistory = new ArrayDeque<>();
@@ -425,10 +422,8 @@ public abstract class PlayerEntity extends LivingEntity implements IPlayerEntity
             if (roundabout$getFate() != style) {
                 roundabout$SetPos2(PlayerPosIndex.NONE);
                 this.getEntityData().set(ROUNDABOUT$FATE, style);
-                rdbt$setSpinRotation(0);
-                rdbt$setSpinHorseCharge(0);
-                rdbt$setSpinEmpoweredTicks(0);
-                rdbt$setInfiniteSpin(false);
+                rdbt$setSpinGuardTicks(0);
+                rdbt$setSpinCounterTicks(0);
             }
         }
     }
@@ -440,28 +435,16 @@ public abstract class PlayerEntity extends LivingEntity implements IPlayerEntity
     public void rdbt$setSpinExperience(int value) { entityData.set(ROUNDABOUT$SPIN_EXPERIENCE, Math.max(0, Math.min(120, value))); }
     @Unique
     @Override
-    public int rdbt$getSpinRotation() { return entityData.get(ROUNDABOUT$SPIN_ROTATION); }
+    public int rdbt$getSpinGuardTicks() { return entityData.get(ROUNDABOUT$SPIN_GUARD); }
     @Unique
     @Override
-    public void rdbt$setSpinRotation(int value) { entityData.set(ROUNDABOUT$SPIN_ROTATION, Math.max(0, Math.min(100, value))); }
+    public void rdbt$setSpinGuardTicks(int value) { entityData.set(ROUNDABOUT$SPIN_GUARD, Math.max(0, Math.min(40, value))); }
     @Unique
     @Override
-    public int rdbt$getSpinHorseCharge() { return entityData.get(ROUNDABOUT$SPIN_HORSE_CHARGE); }
+    public int rdbt$getSpinCounterTicks() { return entityData.get(ROUNDABOUT$SPIN_COUNTER); }
     @Unique
     @Override
-    public void rdbt$setSpinHorseCharge(int value) { entityData.set(ROUNDABOUT$SPIN_HORSE_CHARGE, Math.max(0, Math.min(200, value))); }
-    @Unique
-    @Override
-    public int rdbt$getSpinEmpoweredTicks() { return entityData.get(ROUNDABOUT$SPIN_EMPOWERED); }
-    @Unique
-    @Override
-    public void rdbt$setSpinEmpoweredTicks(int value) { entityData.set(ROUNDABOUT$SPIN_EMPOWERED, Math.max(0, Math.min(200, value))); }
-    @Unique
-    @Override
-    public boolean rdbt$isInfiniteSpin() { return entityData.get(ROUNDABOUT$SPIN_INFINITE); }
-    @Unique
-    @Override
-    public void rdbt$setInfiniteSpin(boolean value) { entityData.set(ROUNDABOUT$SPIN_INFINITE, value); }
+    public void rdbt$setSpinCounterTicks(int value) { entityData.set(ROUNDABOUT$SPIN_COUNTER, Math.max(0, Math.min(40, value))); }
 
     @Unique
     @Override
@@ -2159,10 +2142,8 @@ public abstract class PlayerEntity extends LivingEntity implements IPlayerEntity
             ((LivingEntity) (Object) this).getEntityData().define(ROUNDABOUT$TEAM_COLOR, (byte) 0);
             ((LivingEntity) (Object) this).getEntityData().define(ROUNDABOUT$FATE, (byte) 0);
             this.entityData.define(ROUNDABOUT$SPIN_EXPERIENCE, 0);
-            this.entityData.define(ROUNDABOUT$SPIN_ROTATION, 0);
-            this.entityData.define(ROUNDABOUT$SPIN_HORSE_CHARGE, 0);
-            this.entityData.define(ROUNDABOUT$SPIN_EMPOWERED, 0);
-            this.entityData.define(ROUNDABOUT$SPIN_INFINITE, false);
+            this.entityData.define(ROUNDABOUT$SPIN_GUARD, 0);
+            this.entityData.define(ROUNDABOUT$SPIN_COUNTER, 0);
 
             ((LivingEntity) (Object) this).getEntityData().define(ROUNDABOUT$POWERS, (byte) 0);
             ((LivingEntity) (Object) this).getEntityData().define(ROUNDABOUT$IS_BLINDED, false);

@@ -17,6 +17,12 @@ public final class SpinCharge {
     }
 
     public static float damage(float charge, boolean golden) {
-        return 4 + 4 * Math.max(0, Math.min(1, charge)) + (golden ? 2 : 0);
+        return 4 + 4 * clamp(charge) + (golden ? 2 : 0);
+    }
+    public static float clamp(float charge) {
+        return Float.isFinite(charge) ? Math.max(0, Math.min(1, charge)) : 0;
+    }
+    public static float damage(float charge, boolean golden, boolean bankShot, boolean infinite) {
+        return infinite ? 12F : damage(charge, golden) + (bankShot ? 2F : 0F);
     }
 }

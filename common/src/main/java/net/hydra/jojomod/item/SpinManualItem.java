@@ -31,8 +31,7 @@ public class SpinManualItem extends Item {
                 player.displayClientMessage(Component.translatable("message.roundabout.spin_left"), false);
             } else if (fate == FateTypes.SPIN) {
                 player.displayClientMessage(Component.translatable("message.roundabout.spin_status",
-                        SpinProgression.rank(data.rdbt$getSpinExperience()), data.rdbt$getSpinExperience(),
-                        data.rdbt$getSpinRotation()), false);
+                        SpinProgression.rank(data.rdbt$getSpinExperience()), data.rdbt$getSpinExperience()), false);
             } else {
                 player.displayClientMessage(Component.translatable("message.roundabout.spin_other_fate")
                         .withStyle(ChatFormatting.RED), false);

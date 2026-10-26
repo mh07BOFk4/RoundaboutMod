@@ -23,6 +23,11 @@ public class SpinChargeTest {
         check(SpinCharge.damage(1, true) == 10, "Golden bonus");
         check(SpinCharge.damage(10, true) == 10, "Malformed charge cannot increase damage");
         check(SpinCharge.damage(-10, false) == 4, "Malformed charge cannot make damage negative");
+        check(SpinCharge.damage(1, false, true, false) == 10, "Bank shots reward geometry");
+        check(SpinCharge.damage(1, true, true, false) == 12, "Golden bank-shot bonus");
+        check(SpinCharge.damage(1, true, true, true) == 12, "Infinite shot has a bounded impact");
+        check(SpinCharge.damage(Float.NaN, false) == 4, "Non-finite saved charge cannot corrupt health");
+        check(SpinCharge.clamp(Float.POSITIVE_INFINITY) == 0, "Infinite saved charge is invalid");
         System.out.println(checks + " Spin timing and damage checks passed");
     }
 }
